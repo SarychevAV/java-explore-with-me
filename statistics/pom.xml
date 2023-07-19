@@ -10,15 +10,15 @@
     </parent>
 
     <groupId>ru.practicum</groupId>
-    <artifactId>stats-server</artifactId>
+    <artifactId>statistics</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>stats-server</name>
     <modules>
-        <module>stats-service</module>
-        <module>stats-dto</module>
-        <module>stats-client</module>
+        <module>app</module>
+        <module>api</module>
+        <module>client</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

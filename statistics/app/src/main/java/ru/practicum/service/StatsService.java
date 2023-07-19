@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.mapper.HitMapper;
 import ru.practicum.model.Hit;
-import ru.practicum.model.hit.dto.GetHitDto;
-import ru.practicum.model.hit.dto.PostHitDto;
 import ru.practicum.repository.StatsRepository;
+import ru.practicum.statistics.api.dto.HitDto;
+import ru.practicum.statistics.api.dto.ViewHitStats;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,14 +16,15 @@ import java.util.List;
 public class StatsService {
 
     private final StatsRepository statsRepository;
+    private final HitMapper mapper;
 
-    public void postHit(PostHitDto postHitDto) {
-        Hit hit = HitMapper.toHit(postHitDto);
+    public void postHit(HitDto hitDto) {
+        Hit hit = mapper.dtoToEntity(hitDto);
         statsRepository.save(hit);
     }
 
-    public List<GetHitDto> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
-        List<GetHitDto> result;
+    public List<ViewHitStats> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
+        List<ViewHitStats> result;
         if (unique) {
             if (uris == null) {
                 result = statsRepository.getUniqueStats(start, end);
